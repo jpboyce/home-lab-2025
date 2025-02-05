@@ -1,0 +1,37 @@
+#cloud-config
+autoinstall:
+  version: 1
+  #early-commands:
+  # Stop ssh for packer as it thinks it timed out (workaround)
+  #- sudo systemctl stop ssh
+  locale: en_US
+  network:
+    network:
+      version: 2
+      ethernets:
+        all-en:
+          dhcp4: true
+          match: 
+            name: en*
+        all-eth:
+          dhcp4: true
+          match: 
+            name: eth*
+  storage:
+    layout:
+      name: lvm
+  identity:
+    hostname: ubuntu
+    username: ubuntu
+    password: "$1$VSzGaCQ9$mWGcgBFceTOaiGnapnt3k."
+  ssh:
+    install-server: yes
+    allow-pw: true
+  user-data:
+    disable_root: false
+  packages:
+    - qemu-guest-agent
+  late-commands:
+    - echo 'ubuntu ALL=(ALL) NOPASSWD:ALL' > /target/etc/sudoers.d/ubuntu
+    #- sudo lvm lvextend -l +100%FREE /dev/ubuntu-vg/ubuntu-lv
+    #- sudo resize2fs -p /dev/mapper/ubuntu--vg-ubuntu--lv
