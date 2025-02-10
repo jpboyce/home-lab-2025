@@ -8,26 +8,43 @@ terraform {
   }
 }
 provider "proxmox" {
-  endpoint = "https://proxmox.example.com:8006/api2/json"
-  api_token = "password"
+  endpoint = var.virtual_environment_endpoint
+  api_token = var.virtual_environment_api_token
+  insecure = true
   ssh {
     agent = true
     username = "terraform"
   }
 }
 
-resource "proxmox_virtual_environment_vm" "test" {
-  name = "test"
+# Template resources
+#resource "proxmox_virtual_environment_vm" "ubuntu" {
+#  name = var.ubuntu_template
+#  node_name = "pve2"
+#}
+#
+#resource "proxmox_virtual_environment_vm" "windows2022" {
+#  name = var.windows2022_template
+#  node_name = "pve2"
+#}
+
+# Virtual Machine resources
+resource "proxmox_virtual_environment_vm" "svr31" {
+  name = var.vmconfig["svr31"]["name"]
   node_name = "pve2"
+  description = var.vmconfig["svr31"]["description"]
   clone {
-    vm_id = proxmox_virtual_environment_vm.ubuntu_template.id
+    vm_id = var.ubuntu_template
   }
 
   agent {
     enabled = true
   }
+  cpu {
+    cores = var.vmconfig["svr31"]["cores"]
+  }
   memory {
-    dedicated = 512
+    dedicated = var.vmconfig["svr31"]["memory"]
   }
 
   initialization {
@@ -36,7 +53,8 @@ resource "proxmox_virtual_environment_vm" "test" {
     }
     ip_config {
         ipv4 {
-            address = "dhcp"
+            address = var.vmconfig["svr31"]["ip_address"]
+            gateway = var.vmconfig["svr31"]["gateway"]
         }
   }
   }
