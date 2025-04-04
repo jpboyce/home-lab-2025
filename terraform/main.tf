@@ -14,6 +14,41 @@ provider "proxmox" {
   pm_tls_insecure = true  # Set to false if you have valid SSL
 }
 
+
+resource "proxmox_vm_qemu" "ubuntu" {
+  name = var.ubuntu_template
+  target_node = "pve2"
+  clone = var.ubuntu_template
+
+  # VM Hardware configuration
+  cores = 2
+  sockets = 1
+  memory = 2048
+  network {
+    model = "virtio"
+    bridge = "vmbr0"
+  }
+  disk {
+    size = "32G"
+    type = "scsi"
+    storage = "local-lvm"
+    iothread = true
+  }
+
+  # Network configuration
+  ipconfig0 = "ip=dhcp"
+
+  # Provisioning configuration
+  # provisioner "remote-exec" {
+  #   inline = [
+  #     "echo 'Provisioning Ubuntu VM'",
+  #     "apt-get update",
+  #     "apt-get install -y apache2"
+  #   ]
+  # }
+}
+
+
 # Template resources
 #resource "proxmox_virtual_environment_vm" "ubuntu" {
 #  name = var.ubuntu_template
