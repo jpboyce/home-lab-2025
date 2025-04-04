@@ -45,7 +45,7 @@ variable "disk_size" {
 packer {
     required_plugins {
         proxmox = {
-            version = ">= 1.2.2"
+            version = "1.2.2"
             source = "github.com/hashicorp/proxmox"
         }
     }
@@ -67,7 +67,7 @@ source "proxmox-iso" "ubuntu" {
     boot_iso {
         iso_file = "${var.ubuntu_iso_file}"                # The path of the ISO file to boot from
         unmount = false                                 # The default is false, true unmounts the ISO after installation
-        type = "scsi"                                       
+        type = "scsi"
     }
     #iso_storage_pool = "${var.iso_storage_pool}"        # The name of the storage pool where the ISO file is located
     #unmount_iso = false                                 # The default is false, true unmounts the ISO after installation
@@ -86,7 +86,7 @@ source "proxmox-iso" "ubuntu" {
         storage_pool = "${var.vm_storage_pool}"  # The name of the storage pool where the disk will be created
         disk_size = "${var.disk_size}" # The size of the disk in GB
         cache_mode = "none"         # The default is none
-        #format = "qcow2"            # This will depend on your backing storage, block storage such as LVM/ZFS/Ceph require raw, 
+        #format = "qcow2"            # This will depend on your backing storage, block storage such as LVM/ZFS/Ceph require raw,
                                     # while file storage such as NFS support qcow2 or raw
                                     # qcows2 allows snapshots and thin provisioning
         io_thread = true            # The default is false, true improves performance but requires a virtio-scsci-single controller
@@ -114,13 +114,13 @@ source "proxmox-iso" "ubuntu" {
     machine = "pc"         # The default is pc, but we are setting this to q35
     qemu_agent = true       # The default is true, but you can set this to false if you don't want to install the QEMU agent
     #cd_files = ["./http/meta-data", "./http/user-data"] # The path to the cloud-init files
-    boot_command = [ 
+    boot_command = [
         #"<esc><wait>",
-        "c", 
+        "c",
         "linux /casper/vmlinuz -- autoinstall ds='nocloud-net;s=http://192.168.1.3:{{ .HTTPPort }}/'",
-        "<enter><wait><wait>", 
-        "initrd /casper/initrd", 
-        "<enter><wait><wait>", 
+        "<enter><wait><wait>",
+        "initrd /casper/initrd",
+        "<enter><wait><wait>",
         "boot<enter>"
         ]
     boot_wait = "13s"
