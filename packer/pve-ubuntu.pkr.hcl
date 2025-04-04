@@ -121,7 +121,7 @@ source "proxmox-iso" "ubuntu" {
 
     # Video Settings
     vga {
-        "type" = "virtio" # The default is std, but we are setting this to virtio for best performance
+        type = "qxl" # QXL paravirtualized graphics card. Selecting this also enables SPICE (a remote viewer protocol) for the VM
     }
 
     # Other VM Settings
