@@ -119,6 +119,11 @@ source "proxmox-iso" "ubuntu" {
         pre_enrolled_keys = false # The default is false, but you can set this to true if you want to use pre-enrolled keys
     }
 
+    # Video Settings
+    vga {
+        "type" = "virtio" # The default is std, but we are setting this to virtio for best performance
+    }
+
     # Other VM Settings
     os = "l26"            # The default is other, but we are setting this to l26 for more recent Linux kernels
     machine = "q35"         # The default is pc, but we are setting this to q35
