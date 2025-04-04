@@ -111,7 +111,7 @@ source "proxmox-iso" "ubuntu" {
     }
 
     # Other VM Settings
-    os = "l26"            # The default is other, but we are setting this to win11 for Windows 2022
+    os = "l26"            # The default is other, but we are setting this to l26 for more recent Linux kernels
     machine = "q35"         # The default is pc, but we are setting this to q35
     qemu_agent = true       # The default is true, but you can set this to false if you don't want to install the QEMU agent
     #cd_files = ["./http/meta-data", "./http/user-data"] # The path to the cloud-init files
