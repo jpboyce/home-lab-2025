@@ -95,6 +95,7 @@ source "proxmox-iso" "ubuntu" {
     }
 
     # VM CPU Settings
+    cpu_type = "host"          # The default is host, but we are setting this to host for best performance
     cores = var.cores        # The default is 1
     sockets = var.sockets    # The default is 1
 
