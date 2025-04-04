@@ -60,7 +60,7 @@ source "proxmox-iso" "ubuntu" {
 
     node = "${var.proxmox_node}"
     vm_name = "ubuntu-base"
-    template_description = "Ubuntu 20.04.3 LTS - Built on ${formatdate("YYYY-MM-DD hh:mm:ss ZZZ", timestamp())}"
+    template_description = "Ubuntu 24.04 LTS - Built on ${formatdate("YYYY-MM-DD hh:mm:ss ZZZ", timestamp())}"
 
     # ISO Settings
     #iso_file = "${var.ubuntu_iso_file}"                        # The path of the ISO file to boot from
