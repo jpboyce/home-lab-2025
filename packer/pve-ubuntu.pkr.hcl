@@ -114,7 +114,7 @@ source "proxmox-iso" "ubuntu" {
     bios = "ovmf"
     efi_config {
         efi_storage_pool = "${var.vm_storage_pool}" # The name of the storage pool where the EFI disk will be created
-        efi_format = "raw" # The format of the file backing the disk. Can be raw, cow, qcow, qed, qcow2, vmdk or cloop. Defaults to raw
+        #efi_format = "raw" # The format of the file backing the disk. Can be raw, cow, qcow, qed, qcow2, vmdk or cloop. Defaults to raw
         efi_type = "4m" # Specifies the version of the OVMF firmware to be used. Can be 2m or 4m. Defaults to 4m
         pre_enrolled_keys = false # The default is false, but you can set this to true if you want to use pre-enrolled keys
     }
