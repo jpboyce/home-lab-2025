@@ -6,14 +6,12 @@ terraform {
     }
   }
 }
+
 provider "proxmox" {
-  endpoint = var.virtual_environment_endpoint
-  api_token = var.virtual_environment_api_token
-  insecure = true
-  ssh {
-    agent = true
-    username = "terraform"
-  }
+  pm_api_url      = "https://your-proxmox-server:8006/api2/json"
+  pm_api_token_id = "terraform@pam!api-token"
+  pm_api_token_secret = "your-secret-token"
+  pm_tls_insecure = true  # Set to false if you have valid SSL
 }
 
 # Template resources
