@@ -19,7 +19,6 @@ variable "iso_storage_pool" {
 }
 variable "vm_storage_pool" {
     type = string                   # The name of the storage pool where the VM disk will be created
-    default = "local-lvm"
 }
 variable "virtio_iso_file" {
     type = string                   # The path of the VirtIO ISO file to install drivers from
