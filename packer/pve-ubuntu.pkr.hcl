@@ -62,21 +62,11 @@ source "proxmox-iso" "ubuntu" {
     template_description = "Ubuntu 24.04 LTS - Built on ${formatdate("YYYY-MM-DD hh:mm:ss ZZZ", timestamp())}"
 
     # ISO Settings
-    #iso_file = "${var.ubuntu_iso_file}"                        # The path of the ISO file to boot from
     boot_iso {
         iso_file = "${var.ubuntu_iso_file}"                # The path of the ISO file to boot from
         unmount = false                                 # The default is false, true unmounts the ISO after installation
         type = "scsi"
     }
-    #iso_storage_pool = "${var.iso_storage_pool}"        # The name of the storage pool where the ISO file is located
-    #unmount_iso = false                                 # The default is false, true unmounts the ISO after installation
-
-    # Extra drive for VirtIO drivers
-    #additional_iso_files {
-    #    unmount = true              # The default is false, true unmounts the ISO after installation
-    #    device = "sata5"
-    #    iso_file = "${var.virtio_iso_file}"
-    #}
 
     # VM Hard Disk Settings
     scsi_controller = "virtio-scsi-single" # The default is lsi, but we are setting this to virtio-scsi-single for best performance
@@ -144,9 +134,6 @@ source "proxmox-iso" "ubuntu" {
     ssh_username = "ubuntu"
     ssh_password = "ubuntu"
     ssh_timeout = "20m"
-
-
-
 }
 
 # Build the VM
